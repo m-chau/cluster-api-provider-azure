@@ -101,6 +101,7 @@ var _ = Describe("Conformance Tests", func() {
 
 		var err error
 
+		fmt.Fprintf(GinkgoWriter, "INFO: E2E Settings: %v\n", capi_e2e)
 		kubernetesVersion := e2eConfig.GetVariable(capi_e2e.KubernetesVersion)
 		flavor := e2eConfig.GetVariable("CONFORMANCE_FLAVOR")
 
@@ -120,6 +121,7 @@ var _ = Describe("Conformance Tests", func() {
 
 		// Starting with Kubernetes v1.25, the kubetest config file needs to be compatible with Ginkgo V2.
 		v125 := semver.MustParse("1.25.0-alpha.0.0")
+		fmt.Fprintf(GinkgoWriter, "INFO: E2E ParseTolerant(%s)\n", kubernetesVersion)
 		v, err := semver.ParseTolerant(kubernetesVersion)
 		Expect(err).NotTo(HaveOccurred())
 		if v.GTE(v125) {
